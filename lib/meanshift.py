@@ -4,7 +4,7 @@ import argparse
 
 
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture("../data_files/horse_racing.webm")
 # take first frame of the video
 ret,frame = cap.read()
 # setup initial location of window

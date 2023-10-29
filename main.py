@@ -8,7 +8,7 @@ if __name__ == '__main__':
     #На horse_racing1 работает корректно CSRT - запусти на всех чекни
     #Все переключаются кста на перегоняющего(выделяй первого коня)
     tracker_types = [ 'MIL', 'KCF', 'CSRT']
-    tracker_type = tracker_types[2]
+    tracker_type = tracker_types[1]
 
     #Создаём объект трекера выбранного класса
     if int(minor_ver) < 3:
@@ -22,7 +22,14 @@ if __name__ == '__main__':
       if tracker_type == 'CSRT':
         tracker = cv2.TrackerCSRT_create()
 
-    video = cv2.VideoCapture("data_files/horse_racing1.webm")
+    video = cv2.VideoCapture(0)
+
+    fourcc = int(video.get(cv2.CAP_PROP_FOURCC))
+
+    # Преобразуем числовой код формата в строку
+    fourcc_str = "".join([chr((fourcc >> 8 * i) & 0xFF) for i in range(4)])
+
+    print(f"Формат видео: {fourcc_str}")
 
     if not video.isOpened():
       print("Could not open video")
