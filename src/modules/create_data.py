@@ -9,7 +9,7 @@ print(f"Формат читаемого видео: {fourcc_str}")
 
 
 fourcc = cv2.VideoWriter_fourcc(*'FFV1')  # Выбираем кодек FFV1
-out = cv2.VideoWriter('../../data_files/output.avi', fourcc, 30, (int(video.get(3)), int(video.get(4))))
+out = cv2.VideoWriter('../../data_files/Миша2.avi', fourcc, 30, (int(video.get(3)), int(video.get(4))))
 
 if not video.isOpened():
   print("Could not open video")
@@ -30,5 +30,5 @@ while True:
 
     cv2.imshow("Tracking", frame)
 
-    k = cv2.waitKey(50) & 0xff
+    k = cv2.waitKey(1) & 0xff
     if k == 27: break
