@@ -12,7 +12,7 @@ This reads from video camera (0 by default, or the camera number the user enters
 
 Usage:
 ------
-    camshift.py [<video source>]
+    my_meanshift.py [<video source>]
 
     To initialize tracking, select the object with mouse
 

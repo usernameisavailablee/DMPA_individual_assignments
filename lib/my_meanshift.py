@@ -1,8 +1,10 @@
+import math
+
 import numpy as np
 import cv2 as cv
 
 
-class OurCamShift:
+class OurMeanShift:
   def start(self):
     cap = cv.VideoCapture(0)
     # take first frame of the video
@@ -29,7 +31,7 @@ class OurCamShift:
 
         # track_window = self.roi_to_bbox(roi)
         # ret, _ = cv.CamShift(dst, track_window, term_crit)
-        roi_track_window = self.camshift(dst, roi_track_window)
+        roi_track_window = self.myMeanshift(dst, roi_track_window)
         # Draw it on image
         # pts = cv.boxPoints(ret)
         # pts = np.int0(pts)
@@ -100,7 +102,7 @@ class OurCamShift:
   def roi_to_bbox(self, roi):
     return (roi[0], roi[1], roi[2] - roi[0], roi[3] - roi[1])
 
-  def camshift(self, frame, roi):
+  def myMeanshift(self, frame, roi):
     iter_count = 0
     centroids_history = list()
 
@@ -121,11 +123,11 @@ class OurCamShift:
 
       if ((abs(new_roi[0] - roi[0]) < 2 and abs(new_roi[1] - roi[1]) < 2) or iter_count > 5):
         # s = 2 * math.sqrt(m00/255)
-        # i1 = new_roi[0]
-        # j1 = new_roi[1]
-        # i2 = int(s * 1.5)
-        # j2 = int(s)
-
+        # x0 = new_roi[0]
+        # y0 = new_roi[1]
+        # x1 = int(s * 1.5)
+        # y1 = int(s)
+        # return  self.roi_to_bbox((x0,y0,x1,y1))
         break
 
       roi = new_roi
@@ -133,5 +135,5 @@ class OurCamShift:
     return roi
 
 
-camShift = OurCamShift()
+camShift = OurMeanShift()
 camShift.start()
